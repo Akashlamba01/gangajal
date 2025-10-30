@@ -1,0 +1,536 @@
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  background: #f8f9fa;
+  color: #333;
+}
+
+/* Header */
+header {
+  background: #fff;
+  padding: 16px 32px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Baaki ka pura CSS yahan daalo jo aapke style tag me tha */
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  background: #f8f9fa;
+  color: #333;
+}
+
+/* Header */
+header {
+  background: #fff;
+  padding: 16px 32px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 20;
+}
+
+.site-title {
+  font-family: "Merriweather", serif;
+  color: #d97706;
+  font-weight: bold;
+  font-size: 1.7rem;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+nav a.active {
+  color: #d97706;
+  font-weight: 700;
+  border-bottom: 2px solid #d97706;
+  padding-bottom: 4px;
+}
+
+nav a:hover {
+  color: #d97706;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-btn,
+.cart-btn {
+  font-size: 1.7rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  padding: 6px;
+}
+
+.cart-btn {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #b85c02;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.menu-btn {
+  display: none;
+  /* hidden on desktop */
+}
+
+@media (max-width: 700px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    background: #fff;
+    position: absolute;
+    top: 64px;
+    right: 18px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    z-index: 25;
+    min-width: 160px;
+  }
+
+  nav.show {
+    display: flex;
+  }
+
+  .menu-btn {
+    display: block;
+    /* show on mobile */
+  }
+}
+
+/* Hero */
+.hero {
+  background-image: url("https://www.chardhamtour.in/shop/wp-content/uploads/2023/07/Gangajal-from-gangotri-800.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-color: rgba(45, 45, 45, 0.45);
+  background-blend-mode: overlay;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  padding: 0 6vw;
+}
+
+.hero-content {
+  z-index: 2;
+  margin: 0 auto;
+  padding: 32px 0 18px;
+  max-width: 350px;
+  width: 100%;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 16px 30px;
+  border-radius: 12px;
+  font-weight: 700;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.hero button {
+  margin: 0 auto;
+  display: block;
+  width: 170px;
+  padding: 14px 0;
+  border: none;
+  background: #d97706;
+  color: #fff;
+  font-size: 1.09rem;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 11px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  transition: background-color 0.2s;
+}
+
+.hero button:hover {
+  background: #b85c02;
+}
+
+@media (max-width: 700px) {
+  .hero h2 {
+    font-size: 1.35rem;
+    padding: 12px 20px;
+  }
+}
+
+/* Features */
+.features {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 40px 20px;
+  background: #f9f9f9;
+}
+
+.feature {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.feature h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #228b22;
+}
+
+.feature p {
+  font-size: 1rem;
+  color: #555;
+}
+
+@media (max-width: 700px) {
+  .features {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    padding: 30px 15px;
+  }
+
+  .feature {
+    width: 90%;
+  }
+
+  .feature h3 {
+    font-size: 1.2rem;
+  }
+
+  .feature p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Products */
+.products {
+  padding: 52px 6% 27px 6%;
+  background: #f1f5f9;
+}
+
+.products h2 {
+  text-align: center;
+  font-family: "Merriweather", serif;
+  font-size: 1.4rem;
+  color: #d97706;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 26px;
+}
+
+.product {
+  background: #fff;
+  padding: 28px 18px 22px 18px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s;
+}
+
+.product:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+
+.product img {
+  max-width: 108px;
+  border-radius: 10px;
+  margin-bottom: 13px;
+  height: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09);
+}
+
+.product h3 {
+  font-size: 1.08rem;
+  color: #333;
+  margin-bottom: 9px;
+  font-weight: 600;
+}
+
+.product p {
+  font-size: 1rem;
+  color: #d97706;
+  font-weight: 700;
+  margin: 6px 0 16px 0;
+}
+
+.product button {
+  padding: 9px 23px;
+  background: #d97706;
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.product button:hover {
+  background: #b85c02;
+}
+
+@media (max-width: 700px) {
+  .products h2 {
+    font-size: 1rem;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cart modal styling */
+#cartModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 6000;
+  align-items: center;
+  justify-content: center;
+}
+
+#cartModal[aria-hidden="false"] {
+  display: flex;
+}
+
+#cartModal>.modal-content {
+  background: #fff;
+  padding: 24px 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  max-height: 80vh;
+  width: 90%;
+  overflow-y: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+#cartModal>.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #d97706;
+  font-family: "Merriweather", serif;
+}
+
+#closeCartBtn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#modalCartItems {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+#modalCartItems li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+#modalCartItems li button {
+  background: #ff4d4d;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 18px;
+  padding: 0;
+  text-align: center;
+  margin-left: 12px;
+}
+
+#modalCartTotal {
+  font-weight: 700;
+  text-align: right;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+#modalCheckoutBtn {
+  width: 100%;
+  padding: 12px 0;
+  background: #d97706;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#modalCheckoutBtn:hover {
+  background: #b85c02;
+}
+
+/* footer */
+footer {
+  background: #1a1a1a;
+  color: #ddd;
+  padding: 50px 8% 20px;
+  margin-top: 50px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 220px;
+}
+
+.footer-col h3 {
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 12px;
+  font-family: "Merriweather", serif;
+}
+
+.footer-col h4 {
+  font-size: 1.1rem;
+  color: #d97706;
+  margin-bottom: 12px;
+}
+
+.footer-col p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin: 8px 0;
+}
+
+.footer-col ul li a {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #fff;
+}
+
+/* Social Icons */
+.footer-social {
+  margin-top: 25px;
+  display: flex;
+  gap: 20px;
+}
+
+.footer-social a {
+  font-size: 1.8rem;
+  color: #d97706;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.footer-social a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: left;
+    gap: 25px;
+  }
+}

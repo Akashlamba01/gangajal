@@ -1,0 +1,221 @@
+/* Overlay */
+#cartModal {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  /* shorthand for top, right, bottom, left = 0 */
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.55);
+  align-items: center;
+  justify-content: center;
+  z-index: 6000;
+  backdrop-filter: blur(3px);
+  transition: opacity 0.3s ease;
+}
+
+/* Modal Container */
+.modal-content {
+  background: #ffffff;
+  padding: 24px 28px;
+  border-radius: 14px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  animation: modalFadeIn 0.3s ease;
+}
+
+/* Modal entrance animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header (Title & Close Button) */
+#closeCartBtn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+#closeCartBtn:hover {
+  color: #d97706;
+  transform: scale(1.15);
+}
+
+#cartTitle {
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #d97706;
+  text-align: center;
+  font-family: "Merriweather", serif;
+  font-size: 1.4rem;
+}
+
+/* Empty cart message */
+.modal-content p {
+  text-align: center;
+  color: #777;
+  font-size: 1rem;
+  padding: 20px 0;
+}
+
+/* Cart Item List */
+#modalCartItems {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+#modalCartItems li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+#modalCartItems span {
+  color: #333;
+}
+
+#modalCartItems button {
+  background: #ff4d4d;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#modalCartItems button:hover {
+  background: #e02d2d;
+  transform: scale(1.1);
+}
+
+/* Total */
+#modalCartTotal {
+  font-weight: 700;
+  text-align: right;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Checkout Button */
+#modalCheckoutBtn {
+  width: 100%;
+  padding: 12px 0;
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#modalCheckoutBtn:hover {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  transform: translateY(-2px);
+}
+
+/* =============================
+   📱 RESPONSIVE DESIGN
+   ============================= */
+
+/* Medium devices (tablets ≤ 768px) */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 92%;
+    padding: 20px;
+    max-width: 380px;
+  }
+}
+
+/* Small devices (phones ≤ 480px) */
+@media (max-width: 480px) {
+  .modal-content {
+    width: 94%;
+    padding: 18px;
+    border-radius: 10px;
+    max-width: 360px;
+  }
+
+  #cartTitle {
+    font-size: 1.25rem;
+  }
+
+  #modalCartItems li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  #modalCheckoutBtn {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+
+  #modalCartTotal {
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+
+  #closeCartBtn {
+    font-size: 1.6rem;
+  }
+}
+
+/* Very small screens (≤ 400px) */
+@media (max-width: 400px) {
+  .modal-content {
+    width: 96%;
+    padding: 16px;
+    border-radius: 10px;
+    max-width: 320px;
+  }
+
+  #cartTitle {
+    font-size: 1.1rem;
+  }
+
+  #modalCartItems li {
+    font-size: 0.9rem;
+  }
+
+  #modalCheckoutBtn {
+    font-size: 0.95rem;
+    padding: 9px 0;
+  }
+
+  #modalCartTotal {
+    font-size: 0.95rem;
+  }
+}

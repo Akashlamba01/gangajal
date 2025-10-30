@@ -1,0 +1,116 @@
+/* =============================
+   🌿 FEATURES SECTION
+   ============================= */
+
+.features {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 24px;
+  padding: 60px 8%;
+  background: #fff;
+  text-align: center;
+}
+
+.feature {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 30px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
+  border: 1px solid #f3f3f3;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.feature:hover {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  border-color: #f0d1a8;
+}
+
+.feature h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #b45309;
+  /* amber tone */
+  margin-bottom: 10px;
+  font-family: "Merriweather", serif;
+}
+
+.feature p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Add a small highlight bar */
+.feature::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #d97706;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.feature:hover::after {
+  width: 80px;
+}
+
+/* =============================
+   📱 RESPONSIVE DESIGN
+   ============================= */
+
+@media (max-width: 900px) {
+  .features {
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px 6%;
+  }
+
+  .feature {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .features {
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 5%;
+    gap: 25px;
+  }
+
+  .feature {
+    width: 100%;
+    max-width: 380px;
+    padding: 25px 18px;
+  }
+
+  .feature h3 {
+    font-size: 1.2rem;
+  }
+
+  .feature p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .feature {
+    padding: 22px 14px;
+  }
+
+  .feature h3 {
+    font-size: 1.1rem;
+  }
+
+  .feature p {
+    font-size: 0.9rem;
+  }
+}

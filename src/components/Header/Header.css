@@ -1,0 +1,126 @@
+/* =============================
+   🧭 HEADER STYLES
+   ============================= */
+
+header {
+  background: #ffffff;
+  padding: 16px 32px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 20;
+}
+
+/* Site Title */
+.site-title {
+  font-family: "Merriweather", serif;
+  color: #d97706;
+  font-weight: 700;
+  font-size: 1.7rem;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Navigation Menu */
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+nav a:hover {
+  color: #d97706;
+}
+
+nav a.active {
+  color: #d97706;
+  font-weight: 700;
+  border-bottom: 2px solid #d97706;
+  padding-bottom: 4px;
+}
+
+/* Header Controls */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
+.menu-btn,
+.cart-btn {
+  font-size: 1.7rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  padding: 6px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.menu-btn:hover,
+.cart-btn:hover {
+  transform: scale(1.1);
+  color: #d97706;
+}
+
+/* Cart Icon Badge */
+.cart-btn {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #b85c02;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+/* Menu Button (for mobile only) */
+.menu-btn {
+  display: none;
+}
+
+/* =============================
+   📱 RESPONSIVE DESIGN
+   ============================= */
+
+@media (max-width: 700px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    background: #fff;
+    position: absolute;
+    top: 64px;
+    right: 18px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    z-index: 25;
+    min-width: 160px;
+  }
+
+  nav.show {
+    display: flex;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+}
