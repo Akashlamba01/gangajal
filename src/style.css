@@ -5,15 +5,7 @@ body {
   color: #333;
 }
 
-/* Header */
-header {
-  background: #fff;
-  padding: 16px 32px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 
 /* Baaki ka pura CSS yahan daalo jo aapke style tag me tha */
 body {
@@ -26,7 +18,7 @@ body {
 /* Header */
 header {
   background: #fff;
-  padding: 16px 32px;
+  padding: 5px 32px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
   display: flex;
   justify-content: space-between;
@@ -106,6 +98,10 @@ nav a:hover {
 }
 
 @media (max-width: 700px) {
+  header {
+    padding: 5px 14px;
+  }
+
   nav {
     display: none;
     flex-direction: column;

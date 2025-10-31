@@ -10,7 +10,7 @@ const Products = ({ onAddToCart }) => {
 
   return (
     <section id="products" className="products">
-      <h2>Our Products</h2>
+      <h1>Our Products</h1>
       <div className="product-grid">
         {products.map((p) => (
           <div key={p.name} className="product">

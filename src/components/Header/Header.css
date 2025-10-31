@@ -4,7 +4,7 @@
 
 header {
   background: #ffffff;
-  padding: 8px 32px;
+  padding: 5px 32px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
   display: flex;
   justify-content: space-between;
@@ -107,6 +107,10 @@ nav a.active {
    ============================= */
 
 @media (max-width: 700px) {
+
+  header {
+    padding: 5px 14px;
+  }
 
   .site-title h3 {
     font-size: 1.4rem;
