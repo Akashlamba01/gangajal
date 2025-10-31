@@ -14,8 +14,38 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleAddToCart = (name, price) => {
-    setCart((prev) => [...prev, { name, price }]);
+    setCart((prevCart) => {
+      const existingItemIndex = prevCart.findIndex((item) => item.name === name);
+
+      if (existingItemIndex !== -1) {
+        // If item already exists, show alert instead of increasing qty
+        alert("Already in cart");
+        return prevCart; // return the same cart without changes
+      } else {
+        // Add new item with qty = 1
+        return [...prevCart, { name, price, qty: 1 }];
+      }
+    });
   };
+
+  const handleIncreaseQty = (name) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.name === name ? { ...item, qty: item.qty + 1 } : item
+      )
+    );
+  };
+
+  const handleDecreaseQty = (name) => {
+    setCart((prevCart) =>
+      prevCart
+        .map((item) =>
+          item.name === name ? { ...item, qty: item.qty - 1 } : item
+        )
+        .filter((item) => item.qty > 0) // remove item if qty becomes 0
+    );
+  };
+
 
   const handleRemoveFromCart = (index) => {
     setCart((prev) => prev.filter((_, i) => i !== index));
@@ -38,7 +68,8 @@ function App() {
         cart={cart}
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
-        onRemoveItem={handleRemoveFromCart}
+        onIncreaseQty={handleIncreaseQty}
+        onDecreaseQty={handleDecreaseQty}
       />
     </Router>
   );

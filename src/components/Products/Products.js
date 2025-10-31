@@ -3,9 +3,9 @@ import "./Products.css"; // ✅ Import the CSS
 
 const Products = ({ onAddToCart }) => {
   const products = [
-    { name: "Gangajal 250ml", price: 99 },
-    { name: "Gangajal 500ml", price: 149 },
-    { name: "Gangajal 1 Litre", price: 199 },
+    { name: "Gangajal 250ml", price: 99, img: "https://m.media-amazon.com/images/I/71POXRccXcL._UF1000,1000_QL80_.jpg" },
+    { name: "Gangajal 500ml", price: 149, img: "https://m.media-amazon.com/images/I/71POXRccXcL._UF1000,1000_QL80_.jpg" },
+    { name: "Gangajal 1 Litre", price: 199, img: "https://m.media-amazon.com/images/I/71POXRccXcL._UF1000,1000_QL80_.jpg" },
   ];
 
   return (
@@ -15,7 +15,7 @@ const Products = ({ onAddToCart }) => {
         {products.map((p) => (
           <div key={p.name} className="product">
             <img
-              src="https://m.media-amazon.com/images/I/71POXRccXcL._UF1000,1000_QL80_.jpg"
+              src={p.img}
               alt={p.name}
             />
             <h3>{p.name}</h3>

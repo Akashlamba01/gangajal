@@ -1,36 +1,44 @@
 /* =============================
-   🌿 CONTACT SECTION
+   🌿 CONTACT SECTION (Responsive)
    ============================= */
 #contact {
   background: #f9f9f9;
-  max-width: 600px;
+  width: 100%;
+  max-width: 1100px;
   margin: 50px auto;
-  padding: 30px 25px;
+  padding: 20px 30px 40px;
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
   font-family: "Open Sans", sans-serif;
+  transition: all 0.3s ease;
 }
 
 #contact h1 {
   text-align: center;
   color: #d97706;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   font-size: 1.8rem;
   font-weight: 600;
+}
+
+/* ✅ Base layout: stacked (for mobile first) */
+#contact>div {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 /* =============================
    📝 INFO SECTION
    ============================= */
 .contact-info {
-  margin-bottom: 25px;
+  background: #fffbea;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #f1e4c4;
   color: #444;
   font-size: 0.95rem;
   line-height: 1.6;
-  background: #fffbea;
-  padding: 15px 18px;
-  border-radius: 10px;
-  border: 1px solid #f1e4c4;
 }
 
 .contact-info strong {
@@ -46,74 +54,48 @@
 /* =============================
    📬 FORM STYLES
    ============================= */
-#contact form {
-  display: flex;
-  flex-direction: column;
+.contact-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.03);
 }
 
-#contact label {
+.contact-form label {
   font-weight: 600;
   margin: 10px 0 5px 0;
   color: #333;
 }
 
-#contact input[type="text"],
-#contact input[type="email"],
-#contact input[type="number"],
-#contact textarea {
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
   padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 0.95rem;
   outline: none;
   transition: border 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  margin-bottom: 14px;
 }
 
-#contact input[type="text"]:focus,
-#contact input[type="email"]:focus,
-#contact input[type="number"]:focus,
-#contact textarea:focus {
+.contact-form input:focus,
+.contact-form textarea:focus {
   border-color: #d97706;
   box-shadow: 0 0 5px rgba(217, 119, 6, 0.3);
 }
 
-#contact textarea {
+.contact-form textarea {
   resize: vertical;
   min-height: 100px;
-}
-
-/* Checkbox style */
-#contact input[type="checkbox"] {
-  margin-right: 8px;
-  accent-color: #d97706;
-}
-
-/* =============================
-   📦 BULK ORDER SECTION
-   ============================= */
-.bulk-section {
-  margin-top: 10px;
-  padding: 15px 18px;
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.03);
-}
-
-.bulk-section label {
-  margin-top: 10px;
-  font-weight: 600;
-  color: #444;
-}
-
-.bulk-section input {
-  margin-bottom: 10px;
 }
 
 /* =============================
    🚀 SUBMIT BUTTON
    ============================= */
-#contact button[type="submit"] {
+.contact-form button[type="submit"] {
   margin-top: 15px;
   background: #d97706;
   color: #fff;
@@ -124,27 +106,47 @@
   font-weight: 700;
   font-size: 1rem;
   transition: background 0.3s ease, transform 0.2s ease;
+  width: 100%;
 }
 
-#contact button[type="submit"]:hover {
+.contact-form button[type="submit"]:hover {
   background: #b85c02;
   transform: translateY(-2px);
 }
 
 /* =============================
-   📱 RESPONSIVE DESIGN
+   💻 Desktop layout (side-by-side)
    ============================= */
-@media (max-width: 600px) {
+@media (min-width: 901px) {
+  #contact>div {
+    flex-direction: row;
+    /* Side by side */
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .contact-info,
+  .contact-form {
+    flex: 1;
+    width: 50%;
+  }
+}
+
+/* =============================
+   📱 Mobile Responsiveness
+   ============================= */
+@media (max-width: 900px) {
   #contact {
-    padding: 20px;
-    margin: 30px 15px;
+    max-width: 90%;
+    padding: 25px 20px;
   }
 
   #contact h1 {
     font-size: 1.5rem;
   }
 
-  #contact button[type="submit"] {
+  .contact-form button[type="submit"] {
     font-size: 0.95rem;
     padding: 10px 16px;
   }

@@ -534,3 +534,84 @@ footer {
     gap: 25px;
   }
 }
+
+/* Confirm modal overlay */
+#confirmModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 7000;
+  /* just above cart modal */
+  align-items: center;
+  justify-content: center;
+}
+
+#confirmModal[aria-hidden="false"] {
+  display: flex;
+}
+
+/* Confirm box (same look as Cart modal) */
+.confirm-box {
+  background: #fff;
+  padding: 24px 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  max-height: 80vh;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  position: relative;
+}
+
+.confirm-box h3 {
+  margin-top: 0;
+  margin-bottom: 14px;
+  color: #d97706;
+  font-family: "Merriweather", serif;
+  font-size: 1.25rem;
+}
+
+.confirm-box p {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.confirm-btn,
+.cancel-btn {
+  flex: 1;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.confirm-btn {
+  background: #d97706;
+  color: #fff;
+}
+
+.confirm-btn:hover {
+  background: #b85c02;
+}
+
+.cancel-btn {
+  background: #f1f1f1;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background: #e4e4e4;
+}
