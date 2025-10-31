@@ -36,7 +36,7 @@
 .review-form input[type="text"],
 .review-form textarea,
 .review-form input[type="file"] {
-  width: 100%;
+  width: 94%;
   padding: 9px 11px;
   margin: 8px 0 12px 0;
   border: 1px solid #ddd;
