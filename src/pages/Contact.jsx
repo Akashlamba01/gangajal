@@ -18,7 +18,24 @@ const Contact = () => {
   return (
     <section id="contact">
       <h1>Contact Us</h1>
-      <form onSubmit={handleSubmit}>
+
+      <div className="contact-info">
+        <p>
+          Have a question about our products, pricing, or your recent order? Our
+          team would love to hear from you! Please use the form below to reach
+          out for general inquiries, feedback, or support.
+        </p>
+
+        <p>
+          <strong>Interested in placing a bulk order?</strong>  
+          We offer special pricing for corporate clients, events, and wholesale
+          buyers. Simply check the <em>“Bulk Order”</em> box below and include
+          your requirements — our sales team will get back to you with a custom
+          quote within 24 hours.
+        </p>
+      </div>
+      
+      <form onSubmit={handleSubmit} className="contact-form">
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" value={formData.name} placeholder="Your Name" onChange={handleChange} required />
         <br />

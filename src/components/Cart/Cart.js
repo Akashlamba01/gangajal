@@ -27,9 +27,9 @@ const Cart = ({ cart, isOpen, onClose, onRemoveItem }) => {
             <ul id="modalCartItems">
               {cart.map((item, index) => (
                 <li key={index}>
-                  <span>{item.name}</span>
+                  <span>{item.name} - ₹{item.price}</span>
                   <div>
-                    <span>₹{item.price}</span>
+                    {/* <span>₹{item.price}</span> */}
                     <button onClick={() => onRemoveItem(index)}>×</button>
                   </div>
                 </li>

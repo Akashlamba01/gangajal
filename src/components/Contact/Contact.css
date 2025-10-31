@@ -19,7 +19,33 @@
   font-weight: 600;
 }
 
-/* Form styles */
+/* =============================
+   📝 INFO SECTION
+   ============================= */
+.contact-info {
+  margin-bottom: 25px;
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  background: #fffbea;
+  padding: 15px 18px;
+  border-radius: 10px;
+  border: 1px solid #f1e4c4;
+}
+
+.contact-info strong {
+  color: #b85c02;
+}
+
+.contact-info em {
+  color: #d97706;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* =============================
+   📬 FORM STYLES
+   ============================= */
 #contact form {
   display: flex;
   flex-direction: column;
@@ -33,6 +59,7 @@
 
 #contact input[type="text"],
 #contact input[type="email"],
+#contact input[type="number"],
 #contact textarea {
   padding: 10px 12px;
   border: 1px solid #ccc;
@@ -44,6 +71,7 @@
 
 #contact input[type="text"]:focus,
 #contact input[type="email"]:focus,
+#contact input[type="number"]:focus,
 #contact textarea:focus {
   border-color: #d97706;
   box-shadow: 0 0 5px rgba(217, 119, 6, 0.3);
@@ -54,7 +82,37 @@
   min-height: 100px;
 }
 
-/* Submit button */
+/* Checkbox style */
+#contact input[type="checkbox"] {
+  margin-right: 8px;
+  accent-color: #d97706;
+}
+
+/* =============================
+   📦 BULK ORDER SECTION
+   ============================= */
+.bulk-section {
+  margin-top: 10px;
+  padding: 15px 18px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.03);
+}
+
+.bulk-section label {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #444;
+}
+
+.bulk-section input {
+  margin-bottom: 10px;
+}
+
+/* =============================
+   🚀 SUBMIT BUTTON
+   ============================= */
 #contact button[type="submit"] {
   margin-top: 15px;
   background: #d97706;
@@ -73,7 +131,9 @@
   transform: translateY(-2px);
 }
 
-/* Responsive */
+/* =============================
+   📱 RESPONSIVE DESIGN
+   ============================= */
 @media (max-width: 600px) {
   #contact {
     padding: 20px;

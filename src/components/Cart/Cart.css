@@ -114,8 +114,8 @@
 }
 
 #modalCartItems button:hover {
-  background: #e02d2d;
-  transform: scale(1.1);
+  background: #b23737;
+  /* transform: scale(1.1); */
 }
 
 /* Total */
