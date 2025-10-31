@@ -1,41 +1,52 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Header.css"; // ✅ Import here
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import "./Header.css";
 
 const Header = ({ cartCount, onCartClick }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen((prev) => !prev);
+  };
+
   return (
     <header>
       <div className="site-title">Pure Gangajal</div>
       <div className="header-controls">
         <button
           className="cart-btn"
-          id="cartBtn"
           aria-label="Open cart"
           title="Cart"
           type="button"
           onClick={onCartClick}
         >
           🛒
-          <span className="cart-count" id="cartCount">
-            {cartCount}
-          </span>
+          <span className="cart-count">{cartCount}</span>
         </button>
 
         <button
           className="menu-btn"
-          id="menuBtn"
           aria-controls="navMenu"
-          aria-expanded="false"
+          aria-expanded={menuOpen}
           type="button"
+          onClick={toggleMenu}
         >
           ☰
         </button>
 
-        <nav id="navMenu">
-          <Link to="/">Home</Link>
-          <Link to="/products">Shop</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/contact">Contact</Link>
+        <nav id="navMenu" className={menuOpen ? "show" : ""}>
+          <NavLink to="/" end className={({ isActive }) => isActive ? "active" : ""}>
+            Home
+          </NavLink>
+          <NavLink to="/products" className={({ isActive }) => isActive ? "active" : ""}>
+            Shop
+          </NavLink>
+          <NavLink to="/about" className={({ isActive }) => isActive ? "active" : ""}>
+            About Us
+          </NavLink>
+          <NavLink to="/contact" className={({ isActive }) => isActive ? "active" : ""}>
+            Contact
+          </NavLink>
         </nav>
       </div>
     </header>
