@@ -30,6 +30,7 @@ function App() {
         <Route path="/products" element={<Products onAddToCart={handleAddToCart} />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        {/*  */}
       </Routes>
 
       <Footer />
