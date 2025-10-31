@@ -11,7 +11,9 @@ const Header = ({ cartCount, onCartClick }) => {
 
   return (
     <header>
-      <div className="site-title">Pure Gangajal</div>
+      <div className="site-title">
+        <h3>Pure Gangajal</h3>
+      </div>
       <div className="header-controls">
         <button
           className="cart-btn"

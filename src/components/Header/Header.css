@@ -23,6 +23,12 @@ header {
   letter-spacing: 0.5px;
 }
 
+.site-title h3 {
+  font-size: 1.7rem;
+  /* border: 2px solid red; */
+  margin: 0;
+}
+
 /* Navigation Menu */
 nav {
   display: flex;
@@ -101,6 +107,12 @@ nav a.active {
    ============================= */
 
 @media (max-width: 700px) {
+
+  .site-title h3 {
+    font-size: 1.4rem;
+  }
+
+
   nav {
     display: none;
     flex-direction: column;
