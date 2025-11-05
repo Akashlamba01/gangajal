@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
 import "./Products.css"; // ✅ Import the CSS
-import { getProducts } from "./productService";
 
-const Products = ({ onAddToCart }) => {
+const Products = ({ onAddToCart, useProducts }) => {
 
   // const products = [
   //   { name: "Gangajal 250ml", price: 99, img: "https://m.media-amazon.com/images/I/71POXRccXcL._UF1000,1000_QL80_.jpg" },
@@ -10,22 +8,12 @@ const Products = ({ onAddToCart }) => {
   //   { name: "Gangajal 1 Litre", price: 199, img: "https://m.media-amazon.com/images/I/71POXRccXcL._UF1000,1000_QL80_.jpg" },
   // ];
 
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const data = await getProducts();
-      setProducts(data);
-    };
-    fetchProducts();
-  }, []);
-
 
   return (
     <section id="products" className="products">
       <h2>Our Products</h2>
       <div className="product-grid">
-        {products.map((p) => {
+        {useProducts.map((p) => {
           const discountedPrice = p.discount
             ? (p.basePrice - p.discount)
             : p.basePrice;
