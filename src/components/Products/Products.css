@@ -108,3 +108,30 @@
     font-size: 0.95rem;
   }
 }
+
+.product .price {
+  font-size: 1rem;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.product .price .base-price {
+  text-decoration: line-through;
+  color: #888;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.product .price .discount {
+  color: red;
+  font-weight: 600;
+}
+
+.product .price .final-price {
+  color: #d97706;
+  font-weight: 700;
+  font-size: 1.2rem;
+  /* slightly bigger for emphasis */
+  margin-top: 4px;
+  /* space above final price */
+}
