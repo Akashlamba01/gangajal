@@ -37,7 +37,7 @@ const Products = ({ onAddToCart, useProducts }) => {
 
               <button
                 onClick={() =>
-                  onAddToCart({ id: p._id, name: p.name, price: discountedPrice })
+                  onAddToCart({ id: p._id, name: p.name, basePrice: p.basePrice, price: discountedPrice })
                 }
               >
                 Add to Cart

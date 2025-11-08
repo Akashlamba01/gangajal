@@ -1,14 +1,9 @@
-import React, { useState } from "react";
 import "./Cart.css";
-import ConfirmDialog from "../Products/ConfirmDialog.js";
-import { checkoutProduct } from "./cartService.js";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ cart, setCart, isOpen, onClose, onIncreaseQty, onDecreaseQty }) => {
+  const navigate = useNavigate();
   const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
-  // const [toMobile, setToMobile] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [msg, setMsg] = useState("");
-  const [isOpenConfirm, setIsOpenConfirm] = useState(false);
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) onClose();
@@ -20,69 +15,37 @@ const Cart = ({ cart, setCart, isOpen, onClose, onIncreaseQty, onDecreaseQty }) 
       return;
     }
 
-    const productList = cart
-      .map(
-        (item) =>
-          `• ${item.name} — ₹${item.price} × ${item.qty} = ₹${item.price * item.qty}`
-      )
-      .join("\n");
+    console.log(cart, 'final cart')
 
-    const totalPrice = total;
-
-    setMsg(`Do you want to place this order?\n\nTotal: ₹${totalPrice}`);
-    setIsOpenConfirm(true);
+    onClose()
+    navigate("/confirm-order");
   };
 
-  // 🟢 When user confirms inside dialog
-  const handleConfirm = async (mobile, cart) => {
-    try {
-      // 🟢 Build the product summary string (optional for debugging/logging)
-      const productList = cart
-        .map(
-          (item) =>
-            `• ${item.name} — ₹${item.price} × ${item.qty} = ₹${item.price * item.qty}`
-        )
-        .join("\n");
+  //When user confirms inside dialog
+  // const handleConfirm = async (mobile, cart) => {
+  //   try {
+  //     // 🟢 Build the product summary string (optional for debugging/logging)
+  //     const productList = cart
+  //       .map(
+  //         (item) =>
+  //           `• ${item.name} — ₹${item.price} × ${item.qty} = ₹${item.price * item.qty}`
+  //       )
+  //       .join("\n");
 
-      console.log("📱 WhatsApp:", mobile);
-      console.log("🛒 Cart Items:", cart);
-      console.log("🧾 Product List:\n", productList);
+  //     console.log("📱 WhatsApp:", mobile);
+  //     console.log("🛒 Cart Items:", cart);
+  //     console.log("🧾 Product List:\n", productList);
 
-      // 🟢 Call your checkout API or function
-      await checkoutProduct(mobile, cart);
+  //     // 🟢 Call your checkout API or function
+  //     await checkoutProduct(mobile, cart);
 
-      // 🟢 Reset UI state after successful checkout
-      // setCart([]);
-      setIsOpenConfirm(false);
-
-      // Optional: show success feedback
-      alert("✅ Order confirmed successfully please check your whatsapp!");
-    } catch (error) {
-      console.error("❌ Checkout failed:", error);
-      alert("Something went wrong while confirming your order. Please try again.");
-    }
-  };
-
-
-  // const message =
-  //   `Hello!\n` +
-  //   `I would like to place an order for the following items:\n\n` +
-  //   `${productList}\n\n` +
-  //   `Total Amount: ₹${total}\n\n` +
-  //   `Please confirm the availability.\n` +
-  //   `Thank you!`;
-
-  // const whatsappMessage = encodeURIComponent(message);
-  // // 🟢 open WhatsApp with entered number
-  // // window.open(`https://wa.me/91${mobile}?text=${whatsappMessage}`, "_blank");
-
-
+  //     // Optional: show success feedback
+  //     alert("✅ Order confirmed successfully please check your whatsapp!");
+  //   } catch (error) {
+  //     console.error("❌ Checkout failed:", error);
+  //     alert("Something went wrong while confirming your order. Please try again.");
+  //   }
   // };
-
-  // 🟢 Cancel confirm dialog
-  const handleCancel = () => {
-    setIsOpenConfirm(false);
-  };
 
   return (
     <>
@@ -131,16 +94,8 @@ const Cart = ({ cart, setCart, isOpen, onClose, onIncreaseQty, onDecreaseQty }) 
         </div>
       </section>
 
-      {/* Confirm dialog */}
-      <ConfirmDialog
-        isOpen={isOpenConfirm}
-        message={msg}
-        cart={cart}
-        onCancel={handleCancel}
-        onConfirm={handleConfirm}
-        setWhatsapp={setWhatsapp}
-        whatsapp={whatsapp}
-      />
+      {/* <ConfirmOrder isOpen={isOpenConfirm} cart={cart} onCancel={handleCancel} /> */}
+
     </>
   );
 };
