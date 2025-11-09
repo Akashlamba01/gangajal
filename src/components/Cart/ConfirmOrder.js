@@ -4,6 +4,8 @@ import indianStates from "../../hook/stateAndCitys.json";
 import Dropdown from "./Dropdown";
 import { validateForm } from "../../utils/formValidateion";
 import { toast } from "react-toastify";
+import { checkoutCart } from "./cartService";
+import { API_ROOT } from "../../config/config";
 
 const ConfirmOrder = ({ cart }) => {
   const [formData, setFormData] = useState({
@@ -26,7 +28,7 @@ const ConfirmOrder = ({ cart }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const error = validateForm(formData);
@@ -36,42 +38,71 @@ const ConfirmOrder = ({ cart }) => {
     }
 
     // 🧾 Format product list
-    const productList = cart
-      .map((item, i) => `${i + 1}. ${item.name} (x${item.qty}) - ₹${item.price * item.qty}`)
-      .join("%0A");
+    // const productList = cart
+    //   .map((item, i) => `${i + 1}. ${item.name} (x${item.qty}) - ₹${item.price * item.qty}`)
+    //   .join("%0A");
 
-    // 📦 Address summary
-    const addressMsg = `
-Name: ${formData.fullName}
-Phone: ${formData.phone}
-Address: ${formData.address}
-${formData.landmark ? `Landmark: ${formData.landmark}` : ""}
-City: ${formData.city}
-State: ${formData.state}
-Pincode: ${formData.pincode}
-Payment Method: ${formData.paymentMethod}
-    `.trim();
+    const data = await checkoutCart(finalTotal);
+    console.log(data, 'checkout response')
 
-    // 💬 WhatsApp message
-    const whatsappMessage = `
-🛍️ *New Order from Pure Gangajal*
---------------------------------
-${productList}
+    const options = {
+      key: "rzp_test_4UrA9vSVORBo7q", // Replace with your actual Razorpay Key ID from Dashboard
+      amount: data.amount, // amount in paise (e.g. 14900 = ₹149)
+      currency: "INR",
+      name: "Pure Gangajal", // your company name
+      description: "Order Payment - Pure Gangajal",
+      image: "https://yourdomain.com/logo.png", // replace with your logo or hosted image URL
+      order_id: data.id, // order ID returned from backend when creating Razorpay order
+      callback_url: `${API_ROOT}/products/paymentverification`, // backend endpoint for payment verification
+      prefill: {
+        name: "Gaurav Kumar", email: "gaurav.kumar@example.com", contact: "9000090000",
+      },
+      notes: {
+        address: "Customer Address",
+        product_details: cart
+          .map(item => `${item.name} - ₹${item.price}`)
+          .join(", "),
+      },
+      theme: {
+        color: "#ff9933", // saffron color to match Pure Gangajal theme
+      },
+    };
 
---------------------------------
-*Subtotal:* ₹${total}
-*Delivery Charges:* ₹${deliveryCharge}
-*Total Payable:* ₹${finalTotal}
 
---------------------------------
-📦 *Delivery Address:*
-${addressMsg}
+    const razor = new window.Razorpay(options);
+    razor.open();
 
-Thank you for shopping with us 🙏
-    `.replace(/\n/g, "%0A");
 
-    const whatsappNumber = "919876543210"; // Replace with your WhatsApp number
-    window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, "_blank");
+
+    //whatsapp full setup down ->      
+    // const addressMsg = `
+    //   Name: ${formData.fullName}
+    //   Phone: ${formData.phone}
+    //   Address: ${formData.address}
+    //   ${formData.landmark ? `Landmark: ${formData.landmark}` : ""}
+    //   City: ${formData.city}
+    //   State: ${formData.state}
+    //   Pincode: ${formData.pincode}
+    //   Payment Method: ${formData.paymentMethod}
+    // `.trim();
+    // const whatsappMessage = `
+    //   🛍️ *New Order from Pure Gangajal*
+    //   --------------------------------
+    //   ${productList}
+
+    //   --------------------------------
+    //   *Subtotal:* ₹${total}
+    //   *Delivery Charges:* ₹${deliveryCharge}
+    //   *Total Payable:* ₹${finalTotal}
+
+    //   --------------------------------
+    //   📦 *Delivery Address:*
+    //   ${addressMsg}
+
+    //   Thank you for shopping with us 🙏
+    // `.replace(/\n/g, "%0A");
+    // const whatsappNumber = "919876543210"; // Replace with your WhatsApp number
+    // window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, "_blank");
   };
 
   if (!cart || cart.length === 0)

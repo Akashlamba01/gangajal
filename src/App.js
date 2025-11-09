@@ -13,6 +13,7 @@ import Products from "./pages/Products";
 import About from "./pages/About";
 import { getProducts } from "./components/Products/productService";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -119,6 +120,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/confirm-order" element={<ConfirmOrder cart={cart} />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
       </Routes>
 
       <Footer />
