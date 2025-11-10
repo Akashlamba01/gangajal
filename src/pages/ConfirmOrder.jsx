@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "./Cart.css";
-import indianStates from "../../hook/stateAndCitys.json";
-import Dropdown from "./Dropdown";
-import { validateForm } from "../../utils/formValidateion";
+import "../components/Cart/Cart.css";
+import indianStates from "../hook/stateAndCitys.json";
+import Dropdown from "../components/Cart/Dropdown";
+import { validateForm } from "../utils/formValidateion";
 import { toast } from "react-toastify";
-import { checkoutCart } from "./cartService";
-import { API_ROOT } from "../../config/config";
+import { checkoutCart } from "../components/Cart/cartService";
+import { API_ROOT } from "../config/config";
 
 const ConfirmOrder = ({ cart }) => {
   const [formData, setFormData] = useState({
@@ -37,42 +37,34 @@ const ConfirmOrder = ({ cart }) => {
       return;
     }
 
-    // 🧾 Format product list
-    // const productList = cart
-    //   .map((item, i) => `${i + 1}. ${item.name} (x${item.qty}) - ₹${item.price * item.qty}`)
-    //   .join("%0A");
-
     const data = await checkoutCart(finalTotal);
     console.log(data, 'checkout response')
 
     const options = {
-      key: "rzp_test_4UrA9vSVORBo7q", // Replace with your actual Razorpay Key ID from Dashboard
-      amount: data.amount, // amount in paise (e.g. 14900 = ₹149)
+      key: "rzp_test_4UrA9vSVORBo7q",
+      amount: data.amount,
       currency: "INR",
-      name: "Pure Gangajal", // your company name
-      description: "Order Payment - Pure Gangajal",
-      image: "https://yourdomain.com/logo.png", // replace with your logo or hosted image URL
-      order_id: data.id, // order ID returned from backend when creating Razorpay order
-      callback_url: `${API_ROOT}/products/paymentverification`, // backend endpoint for payment verification
+      name: "Namami Gange",
+      description: "Order Payment - Namami Gange",
+      image: "https://yourdomain.com/logo.png",
+      order_id: data.id,
+      callback_url: `${API_ROOT}/products/paymentverification`,
       prefill: {
-        name: "Gaurav Kumar", email: "gaurav.kumar@example.com", contact: "9000090000",
+        name: formData.fullName, email: formData.email, contact: formData.phone,
       },
       notes: {
-        address: "Customer Address",
+        address: formData.address,
         product_details: cart
           .map(item => `${item.name} - ₹${item.price}`)
           .join(", "),
       },
       theme: {
-        color: "#ff9933", // saffron color to match Pure Gangajal theme
+        color: "#ff9933",
       },
     };
 
-
     const razor = new window.Razorpay(options);
     razor.open();
-
-
 
     //whatsapp full setup down ->      
     // const addressMsg = `

@@ -7,12 +7,13 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Cart from "./components/Cart/Cart";
 
+import { getProducts } from "./components/Products/productService";
+
 import IndexPage from "./pages/index";
 import Contact from "./pages/Contact";
 import Products from "./pages/Products";
 import About from "./pages/About";
-import { getProducts } from "./components/Products/productService";
-import ConfirmOrder from "./components/Cart/ConfirmOrder";
+import ConfirmOrder from "./pages/ConfirmOrder";
 import PaymentSuccess from "./pages/PaymentSuccess";
 
 function App() {
