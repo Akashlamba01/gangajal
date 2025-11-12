@@ -6,21 +6,28 @@ import { validateForm } from "../utils/formValidateion";
 import { toast } from "react-toastify";
 import { checkoutCart } from "../components/Cart/cartService";
 import { API_ROOT } from "../config/config";
+import { useNavigate } from "react-router-dom";
 
 const ConfirmOrder = ({ cart }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
+    email: "",
     address: "",
     landmark: "",
     city: "",
+    dist: "",
     state: "",
     pincode: "",
     paymentMethod: "COD",
+    cart: cart,
   });
 
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
-  const deliveryCharge = 0; // You can make this dynamic later
+  const deliveryCharge = 0;
   const finalTotal = total + deliveryCharge;
 
   const handleChange = (e) => {
@@ -37,76 +44,101 @@ const ConfirmOrder = ({ cart }) => {
       return;
     }
 
-    const data = await checkoutCart(finalTotal);
-    console.log(data, 'checkout response')
+    setLoading(true);
 
-    const options = {
-      key: "rzp_test_4UrA9vSVORBo7q",
-      amount: data.amount,
-      currency: "INR",
-      name: "Namami Gange",
-      description: "Order Payment - Namami Gange",
-      image: "https://yourdomain.com/logo.png",
-      order_id: data.id,
-      callback_url: `${API_ROOT}/products/paymentverification`,
-      prefill: {
-        name: formData.fullName, email: formData.email, contact: formData.phone,
-      },
-      notes: {
-        address: formData.address,
-        product_details: cart
-          .map(item => `${item.name} - ₹${item.price}`)
-          .join(", "),
-      },
-      theme: {
-        color: "#ff9933",
-      },
-    };
+    try {
+      const data = await checkoutCart(formData, finalTotal);
+      console.log(data, "checkout response");
 
-    const razor = new window.Razorpay(options);
-    razor.open();
+      if (!data.razorOrder) {
+        toast.success("Order placed successfully with COD");
+        navigate("/order-success", { state: { order: data } });
+        return;
+      }
 
-    //whatsapp full setup down ->      
-    // const addressMsg = `
-    //   Name: ${formData.fullName}
-    //   Phone: ${formData.phone}
-    //   Address: ${formData.address}
-    //   ${formData.landmark ? `Landmark: ${formData.landmark}` : ""}
-    //   City: ${formData.city}
-    //   State: ${formData.state}
-    //   Pincode: ${formData.pincode}
-    //   Payment Method: ${formData.paymentMethod}
-    // `.trim();
-    // const whatsappMessage = `
-    //   🛍️ *New Order from Pure Gangajal*
-    //   --------------------------------
-    //   ${productList}
+      const options = {
+        key: "rzp_test_4UrA9vSVORBo7q",
+        amount: data.razorOrder.amount,
+        currency: "INR",
+        name: "Namami Gange",
+        description: "Order Payment - Namami Gange",
+        image: "https://yourdomain.com/logo.png",
+        order_id: data.razorOrder.id,
+        callback_url: `${API_ROOT}/payment/verify`,
+        prefill: {
+          name: data.orderData?.fullName,
+          email: data.orderData?.email,
+          contact: data.orderData?.phone,
+        },
+        notes: {
+          orderId: data.orderData?._id,
+          address: data.orderData?.address,
+          product_details: data.orderData?.cart
+            .map((item) => `${item.name} - ₹${item.price}`)
+            .join(", "),
+        },
+        theme: {
+          color: "#ff9933",
+        },
+      };
 
-    //   --------------------------------
-    //   *Subtotal:* ₹${total}
-    //   *Delivery Charges:* ₹${deliveryCharge}
-    //   *Total Payable:* ₹${finalTotal}
+      const razor = new window.Razorpay(options);
+      razor.open();
 
-    //   --------------------------------
-    //   📦 *Delivery Address:*
-    //   ${addressMsg}
+      razor.on("payment.failed", (response) => {
+        toast.error("Payment failed. Please try again.");
+        console.error("Payment failed:", response.error);
+      });
 
-    //   Thank you for shopping with us 🙏
-    // `.replace(/\n/g, "%0A");
-    // const whatsappNumber = "919876543210"; // Replace with your WhatsApp number
-    // window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, "_blank");
+      //whatsapp full setup down ->
+      // const addressMsg = `
+      //   Name: ${formData.fullName}
+      //   Phone: ${formData.phone}
+      //   Address: ${formData.address}
+      //   ${formData.landmark ? `Landmark: ${formData.landmark}` : ""}
+      //   City: ${formData.city}
+      //   State: ${formData.state}
+      //   Pincode: ${formData.pincode}
+      //   Payment Method: ${formData.paymentMethod}
+      // `.trim();
+      // const whatsappMessage = `
+      //   🛍️ *New Order from Pure Gangajal*
+      //   --------------------------------
+      //   ${productList}
+
+      //   --------------------------------
+      //   *Subtotal:* ₹${total}
+      //   *Delivery Charges:* ₹${deliveryCharge}
+      //   *Total Payable:* ₹${finalTotal}
+
+      //   --------------------------------
+      //   📦 *Delivery Address:*
+      //   ${addressMsg}
+
+      //   Thank you for shopping with us 🙏
+      // `.replace(/\n/g, "%0A");
+      // const whatsappNumber = "919876543210"; // Replace with your WhatsApp number
+      // window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, "_blank");
+
+    } catch (err) {
+      toast.error(err.message || "Something went wrong during checkout.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!cart || cart.length === 0)
-    return <p style={{ textAlign: "center", marginTop: "40px" }}>Your cart is empty.</p>;
+    return (
+      <p style={{ textAlign: "center", marginTop: "40px" }}>
+        Your cart is empty.
+      </p>
+    );
 
   return (
     <section className="order-page">
       <h2 className="page-title">Review and Confirm Your Order</h2>
 
-      {/* 🧾 Delivery Details */}
       <form onSubmit={handleSubmit} className="amazon-checkout">
-        {/* Left Side: Address + Payment */}
         <div className="checkout-left">
           <div className="section">
             <h3>1. Delivery Address</h3>
@@ -114,7 +146,7 @@ const ConfirmOrder = ({ cart }) => {
               <input
                 type="text"
                 name="fullName"
-                placeholder="Full Name"
+                placeholder="Full Name *"
                 value={formData.fullName}
                 onChange={handleChange}
                 required
@@ -122,15 +154,31 @@ const ConfirmOrder = ({ cart }) => {
               <input
                 type="tel"
                 name="phone"
-                placeholder="Mobile Number"
+                placeholder="Mobile Number *"
                 value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email *"
+                value={formData.email}
                 onChange={handleChange}
                 required
               />
               <textarea
                 name="address"
-                placeholder="Flat, House no., Building, Company, Apartment..."
+                placeholder="Flat, House no., Building, Company, Apartment... *"
                 value={formData.address}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                name="city"
+                placeholder="City or Town *"
+                value={formData.city}
                 onChange={handleChange}
                 required
               />
@@ -146,22 +194,30 @@ const ConfirmOrder = ({ cart }) => {
                 label="Select State"
                 options={Object.keys(indianStates)}
                 value={formData.state}
-                onChange={(value) => setFormData((prev) => ({ ...prev, state: value, city: "" }))}
+                onChange={(value) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    state: value,
+                    city: "",
+                  }))
+                }
                 disabled={false}
               />
 
               <Dropdown
-                label="Select City"
+                label="Select District"
                 options={formData.state ? indianStates[formData.state] : []}
-                value={formData.city}
-                onChange={(value) => setFormData((prev) => ({ ...prev, city: value }))}
+                value={formData.dist}
+                onChange={(value) =>
+                  setFormData((prev) => ({ ...prev, dist: value }))
+                }
                 disabled={!formData.state}
               />
 
               <input
                 type="number"
                 name="pincode"
-                placeholder="Pincode"
+                placeholder="Pincode *"
                 value={formData.pincode}
                 onChange={handleChange}
                 required
@@ -169,7 +225,6 @@ const ConfirmOrder = ({ cart }) => {
             </div>
           </div>
 
-          {/* Payment Method */}
           <div className="section">
             <h3>2. Payment Method</h3>
             <div className="payment-method">
@@ -187,8 +242,8 @@ const ConfirmOrder = ({ cart }) => {
                 <input
                   type="radio"
                   name="paymentMethod"
-                  value="Pay Online"
-                  checked={formData.paymentMethod === "Pay Online"}
+                  value="Online"
+                  checked={formData.paymentMethod === "Online"}
                   onChange={handleChange}
                 />
                 Pay Online (UPI / Card)
@@ -197,7 +252,6 @@ const ConfirmOrder = ({ cart }) => {
           </div>
         </div>
 
-        {/* Right Side: Order Summary */}
         <div className="checkout-right">
           <div className="section summary-box">
             <h3>3. Order Summary</h3>
@@ -208,7 +262,10 @@ const ConfirmOrder = ({ cart }) => {
                     <strong>{item.name}</strong>
                     <p>Qty: {item.qty}</p>
                   </div>
-                  <span> <span className="base-price">₹{(item.price - item.basePrice) * item.qty}</span>
+                  <span>
+                    <span className="base-price">
+                      ₹{(item.basePrice) * item.qty}
+                    </span>
                     <span style={{ fontWeight: "bold" }}>
                       ₹{item.price * item.qty}
                     </span>
@@ -216,27 +273,29 @@ const ConfirmOrder = ({ cart }) => {
                 </li>
               ))}
             </ul>
+
             <hr />
             <div className="summary-totals">
               <p>Subtotal: ₹{total}</p>
-              <p className="base-price">
-                Delivery:{" "}
-                {/* {total >= 499 ? (
-                  <>
-                    <span className="old-delivery">₹125</span>{" "}
-                    <span className="delivery-off">-50</span>{" "}
-                    <span className="new-delivery">₹0</span>
-                  </>
-                ) : ( */}
-                <>₹50</>
-                {/* )} */}
-              </p>
+              <p className="base-price">Delivery: ₹{deliveryCharge}</p>
               <h4>Total: ₹{finalTotal}</h4>
             </div>
-            <button type="submit" className="confirm-btn">
-              Place Your Order 💬
+
+            <button
+              type="submit"
+              className="confirm-btn"
+              disabled={loading}
+              style={{
+                opacity: loading ? 0.6 : 1,
+                cursor: loading ? "not-allowed" : "pointer",
+              }}
+            >
+              {loading ? "Processing..." : "Place Your Order 💬"}
             </button>
-            <p className="secure-text">🔒 Safe & Secure Checkout via WhatsApp</p>
+
+            <p className="secure-text">
+              🔒 Safe & Secure Checkout via Razorpay / COD
+            </p>
           </div>
         </div>
       </form>

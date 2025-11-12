@@ -23,8 +23,11 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-  z-index: 20;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .site-title {
@@ -265,109 +268,6 @@ nav a:hover {
 }
 
 /* Cart modal styling */
-#cartModal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 6000;
-  align-items: center;
-  justify-content: center;
-}
-
-#cartModal[aria-hidden="false"] {
-  display: flex;
-}
-
-#cartModal>.modal-content {
-  background: #fff;
-  padding: 24px 30px;
-  border-radius: 12px;
-  max-width: 400px;
-  max-height: 80vh;
-  width: 90%;
-  overflow-y: auto;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  position: relative;
-}
-
-#cartModal>.modal-content h3 {
-  margin-top: 0;
-  margin-bottom: 18px;
-  color: #d97706;
-  font-family: "Merriweather", serif;
-}
-
-#closeCartBtn {
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-#modalCartItems {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px 0;
-  max-height: 240px;
-  overflow-y: auto;
-}
-
-#modalCartItems li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: 1rem;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 8px;
-}
-
-#modalCartItems li button {
-  background: #ff4d4d;
-  border: none;
-  border-radius: 50%;
-  color: white;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 18px;
-  padding: 0;
-  text-align: center;
-  margin-left: 12px;
-}
-
-#modalCartTotal {
-  font-weight: 700;
-  text-align: right;
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-}
-
-#modalCheckoutBtn {
-  width: 100%;
-  padding: 12px 0;
-  background: #d97706;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-#modalCheckoutBtn:hover {
-  background: #b85c02;
-}
 
 /* footer */
 footer {

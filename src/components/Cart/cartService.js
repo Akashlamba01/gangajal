@@ -21,12 +21,15 @@ export const checkoutProduct = async (to, cart) => {
   }
 };
 
-export const checkoutCart = async (amount) => {
+export const checkoutCart = async (formData, totalAmount) => {
   try {
-    const products = await apiService.post(API_URLS.chekoutOnlyCart, { amount }, false);
-    return products.data;
+    const obj = {
+      ...formData,
+      totalAmount
+    };
+    const response = await apiService.post(API_URLS.chekoutOnlyCart, obj, false);
+    return response.data;
   } catch (error) {
-    console.error('Failed to fetch products:', error);
-    return [];
+    throw new Error(error)
   }
 };

@@ -22,7 +22,7 @@ const request = async (method, endpoint, data, requireAuth = true) => {
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || 'API request failed');
+      return Promise.reject(errorData?.validation?.body?.message || errorData.message || 'API request failed');
     }
 
     return response.json();

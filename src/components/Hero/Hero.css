@@ -97,9 +97,4 @@
   .hero {
     min-height: 50vh;
   }
-
-  .hero button {
-    width: 80%;
-    padding: 12px 0;
-  }
 }

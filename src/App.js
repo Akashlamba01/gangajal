@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Cart from "./components/Cart/Cart";
-
 import { getProducts } from "./components/Products/productService";
 
 import IndexPage from "./pages/index";
@@ -15,11 +14,12 @@ import Products from "./pages/Products";
 import About from "./pages/About";
 import ConfirmOrder from "./pages/ConfirmOrder";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import OrderSuccess from "./pages/OrderSuccess";
 
 function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,14 +39,14 @@ function App() {
 
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
-      const existingItemIndex = prevCart.findIndex((item) => item.id === product.id);
-
+      const existingItemIndex = prevCart.findIndex(
+        (item) => item.id === product.id
+      );
       if (existingItemIndex !== -1) {
         alert("Already in cart");
         return prevCart;
-      } else {
-        return [...prevCart, { ...product, qty: 1 }];
       }
+      return [...prevCart, { ...product, qty: 1 }];
     });
   };
 
@@ -64,39 +64,45 @@ function App() {
         .map((item) =>
           item.name === name ? { ...item, qty: item.qty - 1 } : item
         )
-        .filter((item) => item.qty > 0) // remove item if qty becomes 0
+        .filter((item) => item.qty > 0)
     );
   };
 
   if (loading) {
     return (
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "60vh",
-        color: "#333",
-        fontFamily: "Arial, sans-serif"
-      }}>
-        <div className="loader" style={{
-          width: "50px",
-          height: "50px",
-          border: "5px solid #f3f3f3",
-          borderTop: "5px solid #007bff",
-          borderRadius: "50%",
-          animation: "spin 1s linear infinite",
-          marginBottom: "16px"
-        }}></div>
-        <h3 style={{
-          fontSize: "1.2rem",
-          fontWeight: "500",
-          color: "#555",
-          letterSpacing: "0.5px"
-        }}>
-          Loading Yours Gangajal...
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "60vh",
+          color: "#333",
+          fontFamily: "Arial, sans-serif",
+        }}
+      >
+        <div
+          className="loader"
+          style={{
+            width: "50px",
+            height: "50px",
+            border: "5px solid #f3f3f3",
+            borderTop: "5px solid #007bff",
+            borderRadius: "50%",
+            animation: "spin 1s linear infinite",
+            marginBottom: "16px",
+          }}
+        ></div>
+        <h3
+          style={{
+            fontSize: "1.2rem",
+            fontWeight: "500",
+            color: "#555",
+            letterSpacing: "0.5px",
+          }}
+        >
+          Loading your Gangajal...
         </h3>
-
         <style>
           {`
           @keyframes spin {
@@ -111,21 +117,54 @@ function App() {
 
   return (
     <Router>
-      <Header cartCount={cart.length} onCartClick={() => setIsCartOpen(true)} />
-      <Routes>
-        <Route
-          path="/"
-          element={<IndexPage onAddToCart={handleAddToCart} useProducts={products} />}
-        />
-        <Route path="/products" element={<Products onAddToCart={handleAddToCart} />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/confirm-order" element={<ConfirmOrder cart={cart} />} />
-        <Route path="/payment-success" element={<PaymentSuccess />} />
-      </Routes>
+      {/* ✅ Fixed Header */}
+      <Header
+        cartCount={cart.length}
+        onCartClick={() => setIsCartOpen(true)}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1000,
+        }}
+      />
 
-      <Footer />
+      {/* ✅ Scrollable Content Area */}
+      <main
+        style={{
+          // paddingTop: "90px", // height of header
+          paddingBottom: "90px", // height of footer
+          minHeight: "100vh",
+          backgroundColor: "#f5f6f6",
+        }}
+      >
+        <Routes>
+          <Route
+            path="/"
+            element={<IndexPage onAddToCart={handleAddToCart} useProducts={products} />}
+          />
+          <Route path="/products" element={<Products onAddToCart={handleAddToCart} />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/confirm-order" element={<ConfirmOrder cart={cart} />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
+        </Routes>
+      </main>
 
+      {/* ✅ Fixed Footer */}
+      <Footer
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 900,
+        }}
+      />
+
+      {/* ✅ Floating Cart Modal */}
       <Cart
         cart={cart}
         setCart={setCart}
@@ -135,7 +174,7 @@ function App() {
         onDecreaseQty={handleDecreaseQty}
       />
 
-      <ToastContainer position="top-right" autoClose={2500} theme="colored" />
+      <ToastContainer position="bottom-right" autoClose={2500} theme="colored" />
     </Router>
   );
 }

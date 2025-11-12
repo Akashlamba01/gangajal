@@ -19,14 +19,16 @@
   background: #ffffff;
   padding: 24px 28px;
   border-radius: 14px;
+  margin-top: 24px;
   max-width: 420px;
   width: 90%;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
   position: relative;
   max-height: 85vh;
-  overflow-y: auto;
+  overflow-y: unset;
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   animation: modalFadeIn 0.3s ease;
+  padding: 50px;
 }
 
 /* Modal entrance animation */
@@ -74,7 +76,7 @@
   text-align: center;
   color: #777;
   font-size: 1rem;
-  padding: 20px 0;
+  /* padding: 20px 0; */
 }
 
 /* Cart Item List */
@@ -90,17 +92,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
+  font-size: 1rem;
   border-bottom: 1px solid #eee;
-  padding: 10px 0;
-  margin-bottom: 6px;
-  font-size: 0.95rem;
+  padding-bottom: 8px;
+}
+
+#modalCartItems li button {
+  background: #ff4d4d;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 18px;
+  padding: 0;
+  text-align: center;
+  margin-left: 12px;
 }
 
 #modalCartItems span {
   color: #333;
 }
 
-#modalCartItems button {
+#modalCartItems li button {
   background: #ff4d4d;
   border: none;
   border-radius: 50%;
@@ -153,8 +170,8 @@
 /* Medium devices (tablets ≤ 768px) */
 @media (max-width: 768px) {
   .modal-content {
-    width: 92%;
-    padding: 20px;
+    width: 70%;
+    padding: 50px;
     max-width: 380px;
   }
 }
@@ -162,8 +179,8 @@
 /* Small devices (phones ≤ 480px) */
 @media (max-width: 480px) {
   .modal-content {
-    width: 94%;
-    padding: 18px;
+    width: 75%;
+    padding: 45px;
     border-radius: 10px;
     max-width: 360px;
   }
@@ -174,7 +191,7 @@
 
   #modalCartItems li {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 8px;
   }
 
@@ -196,7 +213,6 @@
 /* Very small screens (≤ 400px) */
 @media (max-width: 400px) {
   .modal-content {
-    width: 96%;
     padding: 16px;
     border-radius: 10px;
     max-width: 320px;
@@ -298,6 +314,7 @@
   display: flex;
   justify-content: space-between;
   font-weight: 500;
+  text-align: left;
 }
 
 .item-qty {
@@ -490,6 +507,10 @@
 
   .section {
     padding: 20px;
+  }
+
+  .item-info span {
+    font-size: 12px;
   }
 }
 
