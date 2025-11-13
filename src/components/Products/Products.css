@@ -135,3 +135,65 @@
   margin-top: 4px;
   /* space above final price */
 }
+
+
+
+/* Skeleton shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0;
+  }
+
+  100% {
+    background-position: 450px 0;
+  }
+}
+
+/* Skeleton base */
+.skeleton {
+  background: #e3e3e3;
+  background-image: linear-gradient(90deg, #e3e3e3 0px, #f4f4f4 40px, #e3e3e3 80px);
+  background-size: 600px;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Product skeleton card */
+.skeleton-card {
+  padding: 14px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Skeleton image placeholder */
+.skeleton-img {
+  width: 100%;
+  height: 180px;
+  border-radius: 10px;
+}
+
+/* Title skeleton */
+.skeleton-title {
+  width: 70%;
+  height: 18px;
+  margin-top: 14px;
+  border-radius: 6px;
+}
+
+/* Price skeleton */
+.skeleton-price {
+  width: 50%;
+  height: 16px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+/* Button skeleton */
+.skeleton-btn {
+  width: 100%;
+  height: 38px;
+  margin-top: 18px;
+  border-radius: 8px;
+}
