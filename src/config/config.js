@@ -1,5 +1,5 @@
-// export const API_ROOT = "https://gangajal-backend.onrender.com/api";
-export const API_ROOT = "http://localhost:3002/api";
+export const API_ROOT = "https://gangajal-backend.onrender.com/api";
+// export const API_ROOT = "http://localhost:3002/api";
 
 export const API_URLS = {
   login: `${API_ROOT}/admin/login`,

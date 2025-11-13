@@ -4,8 +4,8 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      // target: "https://gangajal-backend.onrender.com",
-      target: "http://localhost:3002",
+      target: "https://gangajal-backend.onrender.com",
+      // target: "http://localhost:3002",
       changeOrigin: true,
     })
   );
