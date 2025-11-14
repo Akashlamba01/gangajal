@@ -64,7 +64,7 @@ const ConfirmOrder = ({ cart }) => {
         description: "Order Payment - Namami Gange",
         image: "https://yourdomain.com/logo.png",
         order_id: data.razorOrder.id,
-        callback_url: `${API_ROOT}/payment/verify`,
+        callback_url: `${API_ROOT}/paymentverification`,
         prefill: {
           name: data.orderData?.fullName,
           email: data.orderData?.email,
