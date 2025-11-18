@@ -10,7 +10,7 @@ const Products = ({ onAddToCart, useProducts, loading }) => {
 
   return (
     <section id="products" className="products">
-      <h2>Our Products</h2>
+      <h2 className="about-heading">Our Products</h2>
       {loading ? (
 
         <div className="product-grid">
@@ -39,6 +39,9 @@ const Products = ({ onAddToCart, useProducts, loading }) => {
                 )}
 
                 <h3>{p.name}</h3>
+                <p className="product-desc">
+                  Ideal for puja, home purification, Griha Pravesh & festivals.
+                </p>
 
                 <p className="price">
                   {p.discount > 0 && (

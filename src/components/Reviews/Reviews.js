@@ -23,27 +23,35 @@ const Reviews = () => {
   const avgRating = allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length;
 
   return (
-    <section className="reviews" id="reviews" aria-label="Customer reviews and ratings">
-      <h2>Customer Reviews & Ratings</h2>
-      <div className="rating-summary">⭐ {avgRating.toFixed(1)} / 5.0 based on {allReviews.length} reviews</div>
+    <section >
+      <h1 className="about-heading">Customer Reviews & Ratings</h1>
+      <div className="reviews" id="reviews" aria-label="Customer reviews and ratings">
+        <div className="rating-summary">⭐ {avgRating.toFixed(1)} / 5.0 based on {allReviews.length} reviews</div>
 
-      <div className="review-list">
-        {visibleReviews.map((review, index) => (
-          <article key={index}>
-            <p>
-              {review.name} <span>{"★".repeat(review.rating) + "☆".repeat(5 - review.rating)}</span>
-            </p>
-            <p>{review.text}</p>
-          </article>
-        ))}
-      </div>
+        <div className="review-list">
+          {visibleReviews.map((review, index) => (
+            <article key={index}>
+              <p className="review-header">
+                {review.name}
+                <span className="review-stars">
+                  {"★".repeat(review.rating) + "☆".repeat(5 - review.rating)}
+                </span>
+                <span className="verified">✔ Verified Purchase</span>
+              </p>
+              <p>{review.text}</p>
+            </article>
 
-      {reviewsToShow < allReviews.length && (
-        <div className="view-more-btn">
-          <button onClick={handleViewMore}>View More Reviews</button>
+          ))}
         </div>
-      )}
+
+        {reviewsToShow < allReviews.length && (
+          <div className="view-more-btn">
+            <button onClick={handleViewMore}>View More Reviews</button>
+          </div>
+        )}
+      </div>
     </section>
+
   );
 };
 

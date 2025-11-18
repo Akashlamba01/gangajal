@@ -15,6 +15,7 @@ import About from "./pages/About";
 import ConfirmOrder from "./pages/ConfirmOrder";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import OrderSuccess from "./pages/OrderSuccess";
+import OrderDetails from "./pages/OrderDetails";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -103,6 +104,7 @@ function App() {
           <Route path="/confirm-order" element={<ConfirmOrder cart={cart} />} />
           <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
+          <Route path="/order-details" element={<OrderDetails />} />
         </Routes>
       </main>
 

@@ -197,3 +197,24 @@
   margin-top: 18px;
   border-radius: 8px;
 }
+
+.about-heading {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #d97706;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.about-heading::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background: #d97706;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 4px;
+}

@@ -4,18 +4,23 @@ import "./Features.css"; // ✅ Import CSS
 const Features = () => {
   const data = [
     {
-      title: "✅ Pure & Authentic",
-      desc: "Collected directly from Haridwar / Gangotri.",
+      title: "💧 100% Pure & Original Gangajal",
+      desc: "Directly sourced from Haridwar/Rishikesh – no chemicals, no mixing.",
     },
     {
-      title: "✅ Hygienically Packed",
-      desc: "Sealed for purity and long shelf life.",
+      title: "🛡️ Hygienically Packed",
+      desc: "Filtered naturally and sealed in food-grade bottles.",
     },
     {
-      title: "✅ Doorstep Delivery",
-      desc: "Delivered safely across India.",
+      title: "🚚 Fast Pan-India Delivery",
+      desc: "Delivered safely to your doorstep with secure packaging.",
+    },
+    {
+      title: "🙏 Spiritual Assurance",
+      desc: "Perfect for daily puja, Griha Pravesh, Hawan & rituals.",
     },
   ];
+
 
   return (
     <section className="features" id="features">

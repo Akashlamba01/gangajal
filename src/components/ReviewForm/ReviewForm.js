@@ -51,7 +51,7 @@ const ReviewForm = () => {
         />
 
         {/* Optional Image */}
-        <label>Upload Image (optional):</label>
+        <label className="file-label">Upload Image (optional):</label>
         <input type="file" accept="image/*" />
 
         {/* Submit */}
